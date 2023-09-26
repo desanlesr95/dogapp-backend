@@ -1,0 +1,21 @@
+version: '3.3'
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=dogapp
+      - POSTGRES_USER=luis
+      - POSTGRES_PASSWORD=admin1234
+    ports:
+      - 5432:5432
+    volumes:
+      - ./postgress_dog_app:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@mail.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    ports:
+      - 5050:80
