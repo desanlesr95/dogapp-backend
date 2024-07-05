@@ -26,6 +26,9 @@ class User_APIView(APIView):
         serializer = UserSerializer(users,many=True)
         return Response(serializer.data)
 
+    permission_classes = [AllowAny]
+    @view_permissions((AllowAny,))
+    @csrf_exempt
     def post(self, request, format=None):
         try:
             serializer = UserSerializer(data=request.data)
@@ -66,6 +69,9 @@ class User_APIView(APIView):
                 return Response({"error": "Credenciales incorrectas"}, status=status.HTTP_401_UNAUTHORIZED)
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+
+    
         
     
 
